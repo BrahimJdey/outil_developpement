@@ -1,0 +1,58 @@
+create table Election(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ date_Debit VARCHAR(100),
+ date_Fin VARCHAR(100),
+ sujet VARCHAR(100)
+);
+
+create table Etudient(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ INE INT NOT NULL UNIQUE,
+ nom VARCHAR(30) NOT NULL,
+ prenom VARCHAR(30) NOT NULL,
+ date VARCHAR(100) NOT NULL,
+ email VARCHAR(100) NOT NULL UNIQUE,
+ password VARCHAR(100) NOT NULL ,
+ inscription VARCHAR(15) NOT NULL UNIQUE,
+ niveau VARCHAR(30) NOT NULL,
+ etablisement VARCHAR(30) NOT NULL
+);
+
+create table Election_Etudient(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ status INT DEFAULT 0,
+ FK_Etudient INT ,
+ FK_Election INT , 
+ FOREIGN KEY (FK_Election) REFERENCES  Election(id) ON DELETE CASCADE,
+ FOREIGN KEY (FK_Etudient) REFERENCES  Etudient(id) ON DELETE CASCADE
+);
+
+create table Syndicat(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ syndicat_type VARCHAR(100),
+ syndicat_nom VARCHAR(100),
+ logo VARCHAR(100)
+);
+
+create table Election_Syndicat(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ nombreElecteurs int default 0,
+ FK_Election INT NOT NULL,
+ FK_Syndicat INT NOT NULL,
+ FOREIGN KEY (FK_Election) REFERENCES  Election(id) ON DELETE CASCADE,
+ FOREIGN KEY (FK_Syndicat) REFERENCES  Syndicat(id) ON DELETE CASCADE
+);
+create table Poste(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ libelle VARCHAR(100),
+ FK_Syndicat INT NOT NULL ,
+ FOREIGN KEY (FK_Syndicat) REFERENCES Syndicat(id) ON DELETE CASCADE,
+ description VARCHAR(100)
+);
+create table Candidat(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ FK_Etudient INT NOT NULL UNIQUE,
+ FK_Syndicat INT NOT NULL,
+ FOREIGN KEY (FK_Etudient) REFERENCES Etudient(id) ON DELETE CASCADE,
+ FOREIGN KEY (FK_Syndicat) REFERENCES Syndicat(id) ON DELETE CASCADE
+);
