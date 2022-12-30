@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.iscae.Election.Model.Etudient">
+        <table name="etudient" schema="election_db" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="-1"/>
+            </id>
+            <basic name="ine">
+                <column name="INE" precision="-1"/>
+            </basic>
+            <basic name="nom">
+                <column name="nom" length="30"/>
+            </basic>
+            <basic name="prenom">
+                <column name="prenom" length="30"/>
+            </basic>
+            <basic name="date">
+                <column name="date" length="100"/>
+            </basic>
+            <basic name="email">
+                <column name="email" length="100"/>
+            </basic>
+            <basic name="password">
+                <column name="password" length="100"/>
+            </basic>
+            <basic name="inscription">
+                <column name="inscription" length="15"/>
+            </basic>
+            <basic name="niveau">
+                <column name="niveau" length="30"/>
+            </basic>
+            <basic name="etablisement">
+                <column name="etablisement" length="30"/>
+            </basic>
+            <one-to-one name="candidatsById" mapped-by="etudientByFkEtudient"
+                         target-entity="com.iscae.Election.Model.Candidat"/>
+            <one-to-many name="electionEtudientsById" mapped-by="etudientByFkEtudient"
+                         target-entity="com.iscae.Election.Model.ElectionEtudient"/>
+        </attributes>
+    </entity>
+</entity-mappings>

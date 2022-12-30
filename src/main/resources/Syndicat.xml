@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.iscae.Election.Model.Syndicat">
+        <table name="syndicat" schema="election_db" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="-1"/>
+            </id>
+            <basic name="syndicatType">
+                <column name="syndicat_type" nullable="false" length="100"/>
+            </basic>
+            <basic name="syndicatNom">
+                <column name="syndicat_nom" nullable="false" length="100"/>
+            </basic>
+            <basic name="logo">
+                <column name="logo" nullable="false" length="100"/>
+            </basic>
+            <one-to-many name="candidatsById" mapped-by="syndicatByFkSyndicat"
+                         target-entity="com.iscae.Election.Model.Candidat"/>
+            <one-to-many name="electionSyndicatsById" mapped-by="syndicatByFkSyndicat"
+                         target-entity="com.iscae.Election.Model.ElectionSyndicat"/>
+            <one-to-many name="postesById" mapped-by="syndicatByFkSyndicat"
+                         target-entity="com.iscae.Election.Model.Poste"/>
+        </attributes>
+    </entity>
+</entity-mappings>
