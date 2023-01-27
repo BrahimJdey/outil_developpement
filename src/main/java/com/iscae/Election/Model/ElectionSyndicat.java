@@ -2,29 +2,21 @@ package com.iscae.Election.Model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "election_syndicat", schema = "election_db", catalog = "")
 public class ElectionSyndicat {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "nombreElecteurs", nullable = true)
     private Integer nombreElecteurs;
-    @Basic
-    @Column(name = "FK_Election", nullable = false)
     private int fkElection;
-    @Basic
-    @Column(name = "FK_Syndicat", nullable = false)
     private int fkSyndicat;
-    @ManyToOne
-    @JoinColumn(name = "FK_Election", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
     private Election electionByFkElection;
-    @ManyToOne
-    @JoinColumn(name = "FK_Syndicat", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
     private Syndicat syndicatByFkSyndicat;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -33,6 +25,8 @@ public class ElectionSyndicat {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "nombreElecteurs")
     public Integer getNombreElecteurs() {
         return nombreElecteurs;
     }
@@ -41,6 +35,8 @@ public class ElectionSyndicat {
         this.nombreElecteurs = nombreElecteurs;
     }
 
+    @Basic
+    @Column(name = "FK_Election")
     public int getFkElection() {
         return fkElection;
     }
@@ -49,6 +45,8 @@ public class ElectionSyndicat {
         this.fkElection = fkElection;
     }
 
+    @Basic
+    @Column(name = "FK_Syndicat")
     public int getFkSyndicat() {
         return fkSyndicat;
     }
@@ -57,6 +55,21 @@ public class ElectionSyndicat {
         this.fkSyndicat = fkSyndicat;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ElectionSyndicat that = (ElectionSyndicat) o;
+        return id == that.id && fkElection == that.fkElection && fkSyndicat == that.fkSyndicat && Objects.equals(nombreElecteurs, that.nombreElecteurs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombreElecteurs, fkElection, fkSyndicat);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Election", referencedColumnName = "id", nullable = false)
     public Election getElectionByFkElection() {
         return electionByFkElection;
     }
@@ -65,6 +78,8 @@ public class ElectionSyndicat {
         this.electionByFkElection = electionByFkElection;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "FK_Syndicat", referencedColumnName = "id", nullable = false)
     public Syndicat getSyndicatByFkSyndicat() {
         return syndicatByFkSyndicat;
     }

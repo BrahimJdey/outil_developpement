@@ -2,25 +2,19 @@ package com.iscae.Election.Model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 public class Poste {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "libelle", nullable = true, length = 100)
     private String libelle;
-    @Basic
-    @Column(name = "FK_Syndicat", nullable = false)
     private int fkSyndicat;
-    @Basic
-    @Column(name = "description", nullable = true, length = 100)
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "FK_Syndicat", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
     private Syndicat syndicatByFkSyndicat;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -29,6 +23,8 @@ public class Poste {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "libelle")
     public String getLibelle() {
         return libelle;
     }
@@ -37,6 +33,8 @@ public class Poste {
         this.libelle = libelle;
     }
 
+    @Basic
+    @Column(name = "FK_Syndicat")
     public int getFkSyndicat() {
         return fkSyndicat;
     }
@@ -45,6 +43,8 @@ public class Poste {
         this.fkSyndicat = fkSyndicat;
     }
 
+    @Basic
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -53,6 +53,21 @@ public class Poste {
         this.description = description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Poste poste = (Poste) o;
+        return id == poste.id && fkSyndicat == poste.fkSyndicat && Objects.equals(libelle, poste.libelle) && Objects.equals(description, poste.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, libelle, fkSyndicat, description);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Syndicat", referencedColumnName = "id", nullable = false)
     public Syndicat getSyndicatByFkSyndicat() {
         return syndicatByFkSyndicat;
     }

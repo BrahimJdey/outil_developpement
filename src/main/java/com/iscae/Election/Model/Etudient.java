@@ -3,45 +3,26 @@ package com.iscae.Election.Model;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Etudient {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "INE", nullable = false)
     private int ine;
-    @Basic
-    @Column(name = "nom", nullable = false, length = 30)
     private String nom;
-    @Basic
-    @Column(name = "prenom", nullable = false, length = 30)
     private String prenom;
-    @Basic
-    @Column(name = "date", nullable = false, length = 100)
     private String date;
-    @Basic
-    @Column(name = "email", nullable = false, length = 100)
     private String email;
-    @Basic
-    @Column(name = "password", nullable = false, length = 100)
     private String password;
-    @Basic
-    @Column(name = "inscription", nullable = false, length = 15)
     private String inscription;
-    @Basic
-    @Column(name = "niveau", nullable = false, length = 30)
     private String niveau;
-    @Basic
-    @Column(name = "etablisement", nullable = false, length = 30)
     private String etablisement;
-    @OneToOne(mappedBy = "etudientByFkEtudient")
-    private Candidat candidatsById;
-    @OneToMany(mappedBy = "etudientByFkEtudient")
+    private Collection<Candidat> candidatsById;
     private Collection<ElectionEtudient> electionEtudientsById;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -50,6 +31,8 @@ public class Etudient {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "INE")
     public int getIne() {
         return ine;
     }
@@ -58,6 +41,8 @@ public class Etudient {
         this.ine = ine;
     }
 
+    @Basic
+    @Column(name = "nom")
     public String getNom() {
         return nom;
     }
@@ -66,6 +51,8 @@ public class Etudient {
         this.nom = nom;
     }
 
+    @Basic
+    @Column(name = "prenom")
     public String getPrenom() {
         return prenom;
     }
@@ -74,6 +61,8 @@ public class Etudient {
         this.prenom = prenom;
     }
 
+    @Basic
+    @Column(name = "date")
     public String getDate() {
         return date;
     }
@@ -82,6 +71,8 @@ public class Etudient {
         this.date = date;
     }
 
+    @Basic
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -90,6 +81,8 @@ public class Etudient {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -98,6 +91,8 @@ public class Etudient {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "inscription")
     public String getInscription() {
         return inscription;
     }
@@ -106,6 +101,8 @@ public class Etudient {
         this.inscription = inscription;
     }
 
+    @Basic
+    @Column(name = "niveau")
     public String getNiveau() {
         return niveau;
     }
@@ -114,6 +111,8 @@ public class Etudient {
         this.niveau = niveau;
     }
 
+    @Basic
+    @Column(name = "etablisement")
     public String getEtablisement() {
         return etablisement;
     }
@@ -122,14 +121,29 @@ public class Etudient {
         this.etablisement = etablisement;
     }
 
-    public Candidat getCandidatsById() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Etudient etudient = (Etudient) o;
+        return id == etudient.id && ine == etudient.ine && Objects.equals(nom, etudient.nom) && Objects.equals(prenom, etudient.prenom) && Objects.equals(date, etudient.date) && Objects.equals(email, etudient.email) && Objects.equals(password, etudient.password) && Objects.equals(inscription, etudient.inscription) && Objects.equals(niveau, etudient.niveau) && Objects.equals(etablisement, etudient.etablisement);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, ine, nom, prenom, date, email, password, inscription, niveau, etablisement);
+    }
+
+    @OneToMany(mappedBy = "etudientByFkEtudient")
+    public Collection<Candidat> getCandidatsById() {
         return candidatsById;
     }
 
-    public void setCandidatsById(Candidat candidatsById) {
+    public void setCandidatsById(Collection<Candidat> candidatsById) {
         this.candidatsById = candidatsById;
     }
 
+    @OneToMany(mappedBy = "etudientByFkEtudient")
     public Collection<ElectionEtudient> getElectionEtudientsById() {
         return electionEtudientsById;
     }

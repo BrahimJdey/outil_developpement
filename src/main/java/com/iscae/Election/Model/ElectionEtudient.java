@@ -2,29 +2,21 @@ package com.iscae.Election.Model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "election_etudient", schema = "election_db", catalog = "")
 public class ElectionEtudient {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "status", nullable = true)
     private Integer status;
-    @Basic
-    @Column(name = "FK_Etudient", nullable = true)
     private Integer fkEtudient;
-    @Basic
-    @Column(name = "FK_Election", nullable = true)
     private Integer fkElection;
-    @ManyToOne
-    @JoinColumn(name = "FK_Etudient", referencedColumnName = "id",insertable=false, updatable=false)
     private Etudient etudientByFkEtudient;
-    @ManyToOne
-    @JoinColumn(name = "FK_Election", referencedColumnName = "id",insertable=false, updatable=false)
     private Election electionByFkElection;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -33,6 +25,8 @@ public class ElectionEtudient {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "status")
     public Integer getStatus() {
         return status;
     }
@@ -41,6 +35,8 @@ public class ElectionEtudient {
         this.status = status;
     }
 
+    @Basic
+    @Column(name = "FK_Etudient")
     public Integer getFkEtudient() {
         return fkEtudient;
     }
@@ -49,6 +45,8 @@ public class ElectionEtudient {
         this.fkEtudient = fkEtudient;
     }
 
+    @Basic
+    @Column(name = "FK_Election")
     public Integer getFkElection() {
         return fkElection;
     }
@@ -57,6 +55,21 @@ public class ElectionEtudient {
         this.fkElection = fkElection;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ElectionEtudient that = (ElectionEtudient) o;
+        return id == that.id && Objects.equals(status, that.status) && Objects.equals(fkEtudient, that.fkEtudient) && Objects.equals(fkElection, that.fkElection);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status, fkEtudient, fkElection);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Etudient", referencedColumnName = "id")
     public Etudient getEtudientByFkEtudient() {
         return etudientByFkEtudient;
     }
@@ -65,6 +78,8 @@ public class ElectionEtudient {
         this.etudientByFkEtudient = etudientByFkEtudient;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "FK_Election", referencedColumnName = "id")
     public Election getElectionByFkElection() {
         return electionByFkElection;
     }

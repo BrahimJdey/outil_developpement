@@ -3,27 +3,20 @@ package com.iscae.Election.Model;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Election {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "date_Debit", nullable = true, length = 100)
     private String dateDebit;
-    @Basic
-    @Column(name = "date_Fin", nullable = true, length = 100)
     private String dateFin;
-    @Basic
-    @Column(name = "sujet", nullable = true, length = 100)
     private String sujet;
-    @OneToMany(mappedBy = "electionByFkElection")
     private Collection<ElectionEtudient> electionEtudientsById;
-    @OneToMany(mappedBy = "electionByFkElection")
     private Collection<ElectionSyndicat> electionSyndicatsById;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -32,6 +25,8 @@ public class Election {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "date_Debit")
     public String getDateDebit() {
         return dateDebit;
     }
@@ -40,6 +35,8 @@ public class Election {
         this.dateDebit = dateDebit;
     }
 
+    @Basic
+    @Column(name = "date_Fin")
     public String getDateFin() {
         return dateFin;
     }
@@ -48,6 +45,8 @@ public class Election {
         this.dateFin = dateFin;
     }
 
+    @Basic
+    @Column(name = "sujet")
     public String getSujet() {
         return sujet;
     }
@@ -56,6 +55,20 @@ public class Election {
         this.sujet = sujet;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Election election = (Election) o;
+        return id == election.id && Objects.equals(dateDebit, election.dateDebit) && Objects.equals(dateFin, election.dateFin) && Objects.equals(sujet, election.sujet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dateDebit, dateFin, sujet);
+    }
+
+    @OneToMany(mappedBy = "electionByFkElection")
     public Collection<ElectionEtudient> getElectionEtudientsById() {
         return electionEtudientsById;
     }
@@ -64,6 +77,7 @@ public class Election {
         this.electionEtudientsById = electionEtudientsById;
     }
 
+    @OneToMany(mappedBy = "electionByFkElection")
     public Collection<ElectionSyndicat> getElectionSyndicatsById() {
         return electionSyndicatsById;
     }
