@@ -1,4 +1,4 @@
-package com.iscae.springProject.payload.request;
+package com.iscae.Election.payload.request;
 
 public class LoginRequest {
 

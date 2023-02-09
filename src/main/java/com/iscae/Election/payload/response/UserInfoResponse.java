@@ -1,6 +1,4 @@
-package com.iscae.springProject.payload.response;
-
-import java.util.List;
+package com.iscae.Election.payload.response;
 
 public class UserInfoResponse {
     private Long id;

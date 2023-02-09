@@ -2,19 +2,25 @@ package com.iscae.Election.Model;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Entity
 public class Candidat {
-    private int id;
-    private int fkEtudient;
-    private int fkSyndicat;
-    private Etudient etudientByFkEtudient;
-    private Syndicat syndicatByFkSyndicat;
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "FK_Etudient", nullable = false)
+    private int fkEtudient;
+    @Basic
+    @Column(name = "FK_Syndicat", nullable = false)
+    private int fkSyndicat;
+    @OneToOne
+    @JoinColumn(name = "FK_Etudient", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
+    private Etudient etudientByFkEtudient;
+    @ManyToOne
+    @JoinColumn(name = "FK_Syndicat", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
+    private Syndicat syndicatByFkSyndicat;
+
     public int getId() {
         return id;
     }
@@ -23,8 +29,6 @@ public class Candidat {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "FK_Etudient")
     public int getFkEtudient() {
         return fkEtudient;
     }
@@ -33,8 +37,6 @@ public class Candidat {
         this.fkEtudient = fkEtudient;
     }
 
-    @Basic
-    @Column(name = "FK_Syndicat")
     public int getFkSyndicat() {
         return fkSyndicat;
     }
@@ -43,21 +45,6 @@ public class Candidat {
         this.fkSyndicat = fkSyndicat;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Candidat candidat = (Candidat) o;
-        return id == candidat.id && fkEtudient == candidat.fkEtudient && fkSyndicat == candidat.fkSyndicat;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, fkEtudient, fkSyndicat);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "FK_Etudient", referencedColumnName = "id", nullable = false)
     public Etudient getEtudientByFkEtudient() {
         return etudientByFkEtudient;
     }
@@ -66,8 +53,6 @@ public class Candidat {
         this.etudientByFkEtudient = etudientByFkEtudient;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "FK_Syndicat", referencedColumnName = "id", nullable = false)
     public Syndicat getSyndicatByFkSyndicat() {
         return syndicatByFkSyndicat;
     }

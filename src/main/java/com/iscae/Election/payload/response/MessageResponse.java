@@ -1,4 +1,4 @@
-package com.iscae.springProject.payload.response;
+package com.iscae.Election.payload.response;
 
 public class MessageResponse {
     private String message;

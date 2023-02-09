@@ -1,7 +1,7 @@
-package com.iscae.springProject.security.services;
+package com.iscae.Election.security.services;
 
-import com.iscae.springProject.models.User;
-import com.iscae.springProject.repositories.UserRepository;
+import com.iscae.Election.Model.User;
+import com.iscae.Election.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

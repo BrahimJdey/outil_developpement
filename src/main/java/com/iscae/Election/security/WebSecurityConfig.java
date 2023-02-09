@@ -1,9 +1,9 @@
-package com.iscae.springProject.security;
+package com.iscae.Election.security;
 
 
-import com.iscae.springProject.security.jwt.AuthEntryPointJwt;
-import com.iscae.springProject.security.jwt.AuthTokenFilter;
-import com.iscae.springProject.security.services.UserDetailsServiceImpl;
+import com.iscae.Election.security.jwt.AuthEntryPointJwt;
+import com.iscae.Election.security.jwt.AuthTokenFilter;
+import com.iscae.Election.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,13 +1,15 @@
-package com.iscae.springProject.security.jwt;
-import java.util.Date;
-import com.iscae.springProject.security.services.UserDetailsImpl;
+package com.iscae.Election.security.jwt;
+
+import com.iscae.Election.security.services.UserDetailsImpl;
+import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.*;
+
+import java.util.Date;
 
 @Component
 public class JwtUtils {

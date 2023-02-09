@@ -1,7 +1,5 @@
-package com.iscae.springProject.payload.request;
+package com.iscae.Election.payload.request;
 
-
-import java.util.Set;
 
 public class SignupRequest {
 

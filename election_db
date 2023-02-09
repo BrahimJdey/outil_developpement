@@ -1,4 +1,4 @@
-create table Election(
+    create table Election(
  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  date_Debit VARCHAR(100),
  date_Fin VARCHAR(100),

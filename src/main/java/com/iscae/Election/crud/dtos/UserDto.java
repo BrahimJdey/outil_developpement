@@ -1,4 +1,4 @@
-package com.iscae.springProject.Dtos;
+package com.iscae.Election.crud.dtos;
 
 import lombok.Data;
 

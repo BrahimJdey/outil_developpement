@@ -1,15 +1,11 @@
 package com.iscae.Election.crud.dtos;
 
 import lombok.Data;
-
-/**
- * @author Abderrahmane
- */
 @Data
 public class EtudientDto
 {
    private int id;
-   private int INE;
+   private int ine;
    private String nom;
    private String prenom;
    private String date;
@@ -26,7 +22,7 @@ public class EtudientDto
                       String email, String password, String inscription,
                       String niveau, String etablisement) {
       this.id = id;
-      this.INE = INE;
+      this.ine = INE;
       this.nom = nom;
       this.prenom = prenom;
       this.date = date;

@@ -3,21 +3,29 @@ package com.iscae.Election.Model;
 import jakarta.persistence.*;
 
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Syndicat {
-    private int id;
-    private String syndicatType;
-    private String syndicatNom;
-    private String logo;
-    private Collection<Candidat> candidatsById;
-    private Collection<ElectionSyndicat> electionSyndicatsById;
-    private Collection<Poste> postesById;
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "syndicat_type", nullable = true, length = 100)
+    private String syndicatType;
+    @Basic
+    @Column(name = "syndicat_nom", nullable = true, length = 100)
+    private String syndicatNom;
+    @Basic
+    @Column(name = "logo", nullable = true, length = 100)
+    private String logo;
+    @OneToMany(mappedBy = "syndicatByFkSyndicat")
+    private Collection<com.iscae.Election.Model.Candidat> candidatsById;
+    @OneToMany(mappedBy = "syndicatByFkSyndicat")
+    private Collection<com.iscae.Election.Model.ElectionSyndicat> electionSyndicatsById;
+    @OneToMany(mappedBy = "syndicatByFkSyndicat")
+    private Collection<com.iscae.Election.Model.Poste> postesById;
+
     public int getId() {
         return id;
     }
@@ -26,8 +34,6 @@ public class Syndicat {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "syndicat_type")
     public String getSyndicatType() {
         return syndicatType;
     }
@@ -36,8 +42,6 @@ public class Syndicat {
         this.syndicatType = syndicatType;
     }
 
-    @Basic
-    @Column(name = "syndicat_nom")
     public String getSyndicatNom() {
         return syndicatNom;
     }
@@ -46,8 +50,6 @@ public class Syndicat {
         this.syndicatNom = syndicatNom;
     }
 
-    @Basic
-    @Column(name = "logo")
     public String getLogo() {
         return logo;
     }
@@ -56,20 +58,6 @@ public class Syndicat {
         this.logo = logo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Syndicat syndicat = (Syndicat) o;
-        return id == syndicat.id && Objects.equals(syndicatType, syndicat.syndicatType) && Objects.equals(syndicatNom, syndicat.syndicatNom) && Objects.equals(logo, syndicat.logo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, syndicatType, syndicatNom, logo);
-    }
-
-    @OneToMany(mappedBy = "syndicatByFkSyndicat")
     public Collection<Candidat> getCandidatsById() {
         return candidatsById;
     }
@@ -78,7 +66,6 @@ public class Syndicat {
         this.candidatsById = candidatsById;
     }
 
-    @OneToMany(mappedBy = "syndicatByFkSyndicat")
     public Collection<ElectionSyndicat> getElectionSyndicatsById() {
         return electionSyndicatsById;
     }
@@ -87,12 +74,11 @@ public class Syndicat {
         this.electionSyndicatsById = electionSyndicatsById;
     }
 
-    @OneToMany(mappedBy = "syndicatByFkSyndicat")
-    public Collection<Poste> getPostesById() {
+    public Collection<com.iscae.Election.Model.Poste> getPostesById() {
         return postesById;
     }
 
-    public void setPostesById(Collection<Poste> postesById) {
+    public void setPostesById(Collection<com.iscae.Election.Model.Poste> postesById) {
         this.postesById = postesById;
     }
 }

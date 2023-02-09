@@ -1,17 +1,14 @@
-package com.iscae.springProject.controllers.auth;
+package com.iscae.Election.controllers.auth;
 
 
-import com.iscae.springProject.Dtos.EtudientDto;
-import com.iscae.springProject.models.Etudient;
-import com.iscae.springProject.models.User;
-import com.iscae.springProject.payload.request.LoginRequest;
-import com.iscae.springProject.payload.request.SignupRequest;
-import com.iscae.springProject.payload.response.MessageResponse;
-import com.iscae.springProject.payload.response.UserInfoResponse;
-import com.iscae.springProject.repositories.EtudientRepo;
-import com.iscae.springProject.repositories.UserRepository;
-import com.iscae.springProject.security.jwt.JwtUtils;
-import com.iscae.springProject.security.services.UserDetailsImpl;
+import com.iscae.Election.Model.User;
+import com.iscae.Election.Repository.UserRepository;
+import com.iscae.Election.payload.request.LoginRequest;
+import com.iscae.Election.payload.request.SignupRequest;
+import com.iscae.Election.payload.response.MessageResponse;
+import com.iscae.Election.payload.response.UserInfoResponse;
+import com.iscae.Election.security.jwt.JwtUtils;
+import com.iscae.Election.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -67,14 +64,6 @@ public class AuthController {
                         jwtCookie.getValue())
                 );
 
-//        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-//                .body(new UserInfoResponse(userDetails.getId(),
-//                        userDetails.getUsername(),
-//                        userDetails.getEmail(),
-//                        roles,
-//                        jwtCookie.getValue())
-//                );
-//        String token = request.getHeader("Authorization");
     }
 
     @PostMapping("/signup")
